@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+{% load wysiwyg %}
+{% wysiwyg_setup %}
+
+<html>
+<head>
+	<title>Blog</title>
+	
+	<style type="text/css">
+	
+	a {
+		text-decoration: none;
+	}
+	.log{
+		margin-left: 80%;
+	}
+	.author{
+		margin-left: 68%;
+	}
+	/*.main{
+
+		position: absolute;
+		z-index: 1;
+	}
+	.screen{
+		position: absolute;
+		width:100%;
+		height: 100%;
+		background-color: rgba(0,0,0,.5);
+		z-index: 10;
+
+	}*/	
+		
+		</style>
+	<script src="{% static 'js/jquery-1.7.1.min.js' %}"> </script>	
+	<!--<script type="text/javascript">
+	$(function(){
+		$('.screen').hide();
+		$(window).dblclick(function(){
+			$('.screen').show();
+		});
+	});
+	</script>-->
+	</head>
+<body>
+{% include 'base.html' %}
+<div class="main">
+
+
+<h1 align="center">Write a Blog</h1>
+
+<form method="POST" action='/success/0/' name='form'>
+{% csrf_token %}
+<!--{{form.as_p}}-->
+<p><b>Title </b></p>
+<p><textarea name=title rows=1 cols=100 required></textarea></p>
+<textarea id="writer" name="content" required></textarea> 
+{% wysiwyg_editor "writer" %}<br><br>
+
+<button type="submit"  name="form" formaction='/success/0/'>Publish</button>
+<button type="submit"  name="form" formaction='/success/1/'>Save as draft</button>		
+<span class="author"> Author : {{user.first_name}} {{user.last_name}}</span>
+</form>
+</div>
+<!--
+<div align=center class="screen">
+	
+{% if num == 1%}
+<h3>Wow! First post is always special.</h3>
+<h1>You made it. Congrats!</h1>
+{% elif num == 2%}
+<h3>Writing is fun. Keep going.</h3>
+<h1>Congrats!</h1>
+{% elif num == 3%}
+<h3>You're developing a good habit. Go on.</h3>
+<h1 class="wish">Congrats!</h1>
+{% else %}
+<h3>You have {{num}} posts under your belt now.</h3>
+<h1>Congrats!</h1>
+{% endif %}
+</div>
+-->
+
+</body> 
+</html>

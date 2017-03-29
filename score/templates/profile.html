@@ -1,0 +1,382 @@
+{% load static %}
+<html>
+<head>
+<link href="{% static 'css/site.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+<style>
+@import url(http://fonts.googleapis.com/css?family=Raleway);
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  
+  background: #473b6d;
+  background: -moz-linear-gradient(45deg, #473b6d 0%, #2b2e59 34%, #242c52 67%, #171935 100%);
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #473b6d), color-stop(34%, #2b2e59), color-stop(67%, #242c52), color-stop(100%, #171935));
+  background: -webkit-linear-gradient(45deg, #473b6d 0%, #2b2e59 34%, #242c52 67%, #171935 100%);
+  background: -o-linear-gradient(45deg, #473b6d 0%, #2b2e59 34%, #242c52 67%, #171935 100%);
+  background: -ms-linear-gradient(45deg, #473b6d 0%, #2b2e59 34%, #242c52 67%, #171935 100%);
+  background: linear-gradient(135deg, #473b6d 0%, #2b2e59 34%, #242c52 67%, #171935 100%);
+  background-attachment: fixed;
+  line-height: 1;
+}
+
+/* Profile Container */
+.profile-box {
+  position: relative;
+  display: inline-block;
+  margin: 2em;
+  padding: 1em 0 0.5em;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  background-color: rgba(60, 60, 60, 0.3);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2), 0 2px 1px rgba(255, 255, 255, 0.3) inset;
+  color: #fff;
+  vertical-align: middle;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  font-family: 'Raleway', sans-serif;
+  /* Profile Header */
+  /*Profile Details */
+  /* Profile contact button */
+}
+.profile-box .profile-header {
+  margin: 0;
+  padding: 1em 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  text-align: center;
+  /* Profil Image*/
+  /* Profile Name */
+}
+.profile-box .profile-header .profile-img {
+  display: inline-block;
+  margin: 0 1em;
+  padding: 0.6em;
+  border-radius: 50%;
+  background-color: rgba(40, 40, 40, 0.4);
+  box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.2), 0 0 8px rgba(0, 0, 0, 0.5) inset;
+  /* Image container */
+}
+.profile-box .profile-header .profile-img span {
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6);
+  vertical-align: middle;
+}
+.profile-box .profile-header .profile-name {
+  margin: 0.75em 0 0;
+  padding: 0 0.5em;
+  font-size: 1.6em;
+}
+.profile-box .profile-detail {
+  overflow: hidden;
+  padding: 0.8em;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+  font-size: 0.8em;
+  /* Profil Details Values */
+}
+.profile-box .profile-detail:last-child {
+  box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.1);
+}
+.profile-box .profile-detail span {
+  float: left;
+  padding: 0.6em 1em;
+}
+.profile-box .profile-detail .profile-value {
+  float: right;
+  margin-left: 1.5em;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.2), 0 0 8px rgba(0, 0, 0, 0.5) inset;
+  text-align: center;
+  font-weight: bold;
+}
+.profile-box .profile-btn-contact {
+  position: absolute;
+  top: 1em;
+  left: 100%;
+  width: 2em;
+  height: 2em;
+  background-color: rgba(255, 104, 0, 0.8);
+  color: #fff;
+  text-align: center;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  line-height: 2;
+  -webkit-transition: background-color 0.4s;
+  -moz-transition: background-color 0.4s;
+  -ms-transition: background-color 0.4s;
+  -o-transition: background-color 0.4s;
+  transition: background-color 0.4s;
+}
+.profile-box .profile-btn-contact:hover {
+  background-color: rgba(255, 104, 0, 0.1);
+}
+
+/* Big Profile Box */
+.big {
+  font-size: 1.3em;
+}
+.big .profile-detail {
+  font-size: 0.7em;
+}
+
+/* Small Profile Box */
+.small {
+  font-size: 0.8em;
+}
+.small .profile-detail {
+  font-size: 0.9em;
+}
+
+/* Title + credits */
+.title,
+.credits {
+  padding: 1em;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Title */
+.title {
+  font-size: 2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(71, 59, 109, 0.1);
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1), -1px -1px 1px rgba(255, 255, 255, 0.1), -1px 1px 1px rgba(255, 255, 255, 0.1), 1px -1px 1px rgba(255, 255, 255, 0.1);
+  -webkit-transition: text-shadow .8s, color .8s;
+  -moz-transition: text-shadow .8s, color .8s;
+  -ms-transition: text-shadow .8s, color .8s;
+  -o-transition: text-shadow .8s, color .8s;
+  transition: text-shadow .8s, color .8s;
+}
+.title:hover {
+  text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.1), -1px -1px 10px rgba(255, 255, 255, 0.1), -1px 1px 10px rgba(255, 255, 255, 0.1), 1px -1px 10px rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Credits */
+.credits {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  font-size: 0.7em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+.credits a {
+  color: #3a7283;
+  text-decoration: none;
+  -webkit-transition: color 0.4s;
+  -moz-transition: color 0.4s;
+  -ms-transition: color 0.4s;
+  -o-transition: color 0.4s;
+  transition: color 0.4s;
+}
+.credits a:hover {
+  color: #ae9aa1;
+}
+.post a,.post p {
+	color : black;
+}
+.row {
+    line-height:24pt;
+    border: solid 1px black;
+}
+
+.row:nth-child(odd) {
+    background: #e0e0e0;
+}
+
+h3 {
+    line-height:36pt;
+    font-weight:bold;
+    color:blue;
+}
+h2 {
+	background: url("/static/img/open.png") no-repeat 0 11px;
+	padding: 10px 0 0 25px;
+	cursor: pointer;
+}
+h2.close {
+	background-image: url("/static/img/open.png");
+}
+.answer {
+	margin-left: 25px;	
+}
+</style>
+
+<script src="{% static 'js/jquery-1.7.1.min.js' %}"></script>
+
+<script type="text/javascript">
+	//$(document).ready(function(){
+	//$('.post p').addClass('try');	
+	//$('.try').collapser({
+	//	mode: 'chars',
+	//	truncate: 30
+	//});
+	//});
+$(document).ready(function() {
+// $('.answer p').css("background","black");
+ $('.answer').hide();
+ $('.main h2').toggle(
+		function() {
+	       $(this).next('.answer').slideDown();
+		   $(this).addClass('close');
+		},
+		function() {
+		   $(this).next('.answer').slideUp();
+		   $(this).removeClass('close');
+	  }
+	); // end toggle
+
+
+$('a.button1').click(function(){
+			if ($(this).attr('class') == 'fa-close'){
+			$(this).removeClass('fa-close');
+			$(this).addClass('fa-check');
+			$.ajax({
+      			url:'http://127.0.0.1:8000/follow/{{puser.username}}/1/',
+      			
+      			dataType : "json",
+
+      			type: "GET",
+      			
+
+      			success : function(d,status,xhr){
+      				console.log("Unfollowed");
+      			},      			
+      			error : function(xhr,errmsg,err){
+      				console.log(xhr.status);
+      			}
+      			});
+		}
+		else {
+				$(this).removeClass('fa-check');
+			$(this).addClass('fa-close');
+			
+			$.ajax({
+      			url:'http://127.0.0.1:8000/follow/{{puser.username}}/0/',
+      			
+      			dataType : "json",
+
+      			type: "GET",
+      			
+
+      			success : function(d,status,xhr){
+      				console.log($(this).attr("class"));
+      			},      			
+      			error : function(xhr,errmsg,err){
+      				console.log(xhr.status);
+      			}
+      			});
+		}
+		});
+
+
+}); // end ready
+
+
+</script>
+</head>
+<body>
+
+
+<div class="profile-box big">
+{% ifequal val 1%}
+  <a class="profile-btn-contact button1" title="Contact"><i class="fa fa-check" style="margin-top:6px;"></i></a>
+ {% else %}
+ <a class="profile-btn-contact button1" title="Contact"><i class="fa fa-close" style="margin-top:6px;"></i></a>
+ {%endifequal %} 
+  <figure class="profile-header">
+    <div class="profile-img">
+    {% if more.image %}
+      <span><img class="profile-avatar" src="{{more.image.url}}" alt="me" width="150" height="150"></span>
+     {% else %} 
+     <span><img class="profile-avatar" src="/media/uploads/default1.jpg" alt="me" width="150" height="150"></span>
+    {% endif %} 
+    </div>
+      <figcaption class="profile-name">{{puser.username}}</figcaption>
+  </figure>
+  <p class="profile-detail">
+   <span class="profile-label">Name:</span><span class="profile-value">{{puser.first_name}} {{puser.last_name}}</span>
+  </p>
+  <p class="profile-detail">
+    <span class="profile-label">Email:</span><span class="profile-value">{{puser.email}}</span>
+  </p>
+  <p class="profile-detail">
+    <span class="profile-label">Date Joined :</span><span class="profile-value">{{puser.date_joined}}</span>
+  </p>
+  <p class="profile-detail">
+    <span class="profile-label">Last logged-in :</span><span class="profile-value">{{puser.last_login}}</span>
+  </p>
+  <p class="profile-detail">
+    <span class="profile-label">Followers :</span><span class="profile-value">{{followers}}</span>
+  </p>
+  <p class="profile-detail">
+    <span class="profile-label">Articles Posted :</span><span class="profile-value">{{count}}</span>
+  </p>
+  
+</div>
+<!--
+<div class="post">
+<h3>Articles by {{puser.username}}</h3>
+
+{% if posts %}
+{% for i in posts %}
+{% ifequal i.is_draft False %}
+<div class="row">
+<h3><a href="/profile/{{puser.username}}/{{i.title}}">{{i.title}}</a></h3></div>
+<div class="row">{{i.post|safe}}</div>
+{% endifequal %}
+{%endfor%}
+{% else %}
+<p><i>Hasnt posted yet :/</i></p>
+{% endif %}
+</div>
+-->
+<div class="content">
+	<div class="main">
+<h1>Articles by {{puser.username}}</h1>
+{% if posts %}
+{% for i in posts %}
+{% ifequal i.is_draft False %}
+<h2 >{{i.title}}</h2>
+      <div class="answer">
+        {{i.post|safe}}
+        <a href="/profile/{{puser.username}}/{{i.title}}">Open in another tab to comment.</a>
+      </div>
+{% endifequal %}
+{%endfor%}
+{% else %}
+<p><i>Hasnt posted yet :/</i></p>
+{% endif %}
+      
+</div>
+</div>
+</body>
+</html>

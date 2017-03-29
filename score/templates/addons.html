@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Optional Info</title>
+	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href="{% static 'css/form_style.css' %}" rel="stylesheet">
+	<style type="text/css">
+	a {
+		text-decoration: none;
+	}
+	.log{
+		margin-left: 80%;
+	}
+
+.userPanel .username {
+  		float: right;
+  		line-height: 30px;
+  		padding: 0px 20px ;
+  		font-weight: 700;
+	}
+	.userPanel {
+  		width: 100%;
+  		float: right;
+  		margin-top: -50%;
+	}
+
+	.userPanel .button {
+	  float: right;
+	  height: 30px;
+	  line-height: 30px;
+	  background-color: #54b9cd;
+	  -moz-border-radius: 4px;
+	  -webkit-border-radius: 4px;
+	  border-radius: 4px;
+	  padding: 0px 20px;
+	  cursor: pointer;
+	  color: blue;
+	  font-weight: 700;
+	  box-shadow: inset 0 0 0 1px #27496d;
+	  border: none;
+	}
+	.userPanel .button.active {
+  		background-color: #54b9cd;
+  		box-shadow: inset 0 0 0 1px #27496d;
+	    border: none;
+	}
+
+	.userPanel .button.inverz {
+  		background-color: #54b9cd;
+  		border: 1px solid #AAA;
+  		width: 10px;
+  		color: #AAA;
+  		font-size: 1.3em;
+  		padding-left: 10px;
+  		padding-right: 16px;
+  		float: right;
+  		box-shadow: inset 0 0 0 1px #27496d;
+	    border: none;
+	    background-image: linear-gradient(top, #6496c8, #346392);
+
+	}
+
+	.userPanel .button.hover{
+		box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047;
+		background-image: linear-gradient(top, #6496c8, #346392);
+	}
+
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+	
+	padding: 10px 40px;
+	margin: 0px 10px 10px 40%;
+
+	border-radius: 8px;
+	font-family: 'Pacifico', cursive;
+	font-size: 25px;
+	color: #FFF;
+	text-decoration: none;	
+}
+
+.blue
+{
+	background-color: #3498DB;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9;
+}
+.action-button:active
+{
+	transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+	border-bottom: 1px solid;
+}
+	ul { list-style: outside none none; }
+	#container {
+  		margin: 0 18%;
+		width: 60rem;
+	}
+
+	.tags {
+  		background: none repeat scroll 0 0 #D2E9FF;
+ 		 border: 1px solid #ccc;
+ 		 display: table;
+  		padding: 0.5em;
+ 		 width: 65%;
+	}
+
+	.tags li.tagAdd,
+	.tags li.addedTag {
+ 		 float: left;
+ 		 margin-left: 0.25em;
+  		margin-right: 0.25em;
+	}
+
+	.tags li.addedTag {
+ 		 background: none repeat scroll 0 0 #1ABC9C;
+ 		 border-radius: 20px 0 20px 0;
+ 		 color: #fff;
+  		padding: .5em;
+	}
+
+	.tags input,
+	li.addedTag {
+  		border: 1px solid transparent;
+  		border-radius: 5px;
+ 		 box-shadow: none;
+  		display: block;
+ 		 padding: 0.5em;
+	}
+
+	.tags input:hover { border: 1px solid #000; }
+
+	span.tagRemove {
+	  cursor: pointer;
+ 	 display: inline-block;
+ 	 padding-left: 0.5em;
+	}
+
+	span.tagRemove:hover { color: #222222; }
+	.heading{
+		font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	}
+
+	</style>
+	<script src="{% static 'js/jquery-1.7.1.min.js' %}"></script>
+	<script type="text/javascript">
+		 $(document).ready(function() {
+		 	$('.elegant-aero').hide();
+		 	$('.action-button').click(function(){
+		 		$(this).hide();
+		 		$('#container').slideUp(1000);
+		 		$('.elegant-aero').slideDown(1000);
+		 	});
+		 	$('.button').click(function(){
+		 		$(this).css('background','#49E360');
+		 		
+
+		 	});
+		 	
+			$('#addTagBtn').click(function() {
+                $('#tags option:selected').each(function() {
+                    $(this).appendTo($('#selectedTags'));
+                });
+            });
+            $('#removeTagBtn').click(function() {
+                $('#selectedTags option:selected').each(function(el) {
+                    $(this).appendTo($('#tags'));
+                });
+            });
+ 			$('.tagRemove').click(function(event) {
+                event.preventDefault();
+                $(this).parent().remove();
+            });
+            $('ul.tags').click(function() {
+                $('#tags-field').focus();
+            });
+            $('#tags-field').keypress(function(event) {
+                if (event.which == '13') {
+                    if ($(this).val() != '') {
+                        $('<li class="addedTag">' + $(this).val() + '<span class="tagRemove" onclick="$(this).parent().remove();">x</span><input type="hidden" value="' + $(this).val() + '" name="tags[]"></li>').insertBefore('.tags .tagAdd');
+                        $(this).val('');
+                    }
+                }
+            });
+
+  });
+  
+	</script>
+</head>
+<body>
+{% include 'base.html' %}
+<div id="container" style="margin-top:150px;">
+ <span class="heading">Sports Interested In :</span> 
+  <ul class="tags">
+   <li class="tagAdd taglist">
+      <input type="text" id="tags-field" class="interest" placeholder="Click here to enter">
+    </li>
+  </ul>
+</div>
+
+<div class="elegant-aero">
+
+<form action="/saveinfo/" enctype="multipart/form-data" method="post" >
+
+{% csrf_token %} 
+    <h1>Tell us more about yourself. 
+        <span>*All the fields are optional.</span>
+    </h1>
+    <label>
+        <span>Your Favorite Quote :</span>
+        <input type="text" name=quote placeholder="Rest is Rust" />
+    </label>
+    
+    <label>
+        <span>Social Links :</span>
+        <input type="url" name=url placeholder="Valid Email Address" />
+    </label>
+    
+    <label>
+        <span>Describe yourself :</span>
+        <textarea  name=about placeholder="Be short and concise."></textarea>
+    </label> 
+     <label>
+        <span>Profile Image :</span>
+        <input type="file" name=image class="image"/>
+    </label>    
+    <br>
+     <label>
+        <span>&nbsp;</span> 
+        <input type="submit" class="button" value="Good To Go" /> 
+    </label>    
+</form>
+
+</div>
+<a href="#" class="action-button animate blue">Next</a>
+
+</body>
+</html>

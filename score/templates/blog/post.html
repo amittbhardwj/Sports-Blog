@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+	<title>Posts</title>
+	<link href="{% static 'css/social-buttons.css' %}" rel="stylesheet">
+	<link rel="canonical" href="http://theashublog.com" >
+
+	<style type="text/css">
+	@import url(http://fonts.googleapis.com/css?family=Great+Vibes);
+	@import url(http://fonts.googleapis.com/css?family=Righteous);
+	@import url(http://fonts.googleapis.com/css?family=Roboto);
+	
+	.body{
+		margin-top: 50px;
+	}
+	article,section {
+		display: block;
+	}
+	a {
+		text-decoration: none;
+	}
+	.log{
+		margin-left: 80%;
+	}
+	.author {
+		margin-left: 60%;	
+	}
+
+	dd{
+		font-style: italic;
+	}
+	h1 {
+	color: #d54d7b;
+	font-family: "Great Vibes", cursive;
+	font-size: 165px;
+	line-height: 160px;
+	font-weight: normal;
+	margin-bottom: 0px;
+	margin-top:40px;
+	text-align: center;
+	text-shadow:0 1px 1px #fff;
+}
+
+.post p{
+	color: #7a7c7f;
+	
+	font-family: 'Righteous', cursive;/*font-family: "Libre Baskerville", serif;*/
+	
+	text-align: center;
+	padding-top:20px;
+}
+
+
+.date {
+	border-top: 1px solid black;
+	position:relative;
+	top: 20px;
+	margin-bottom: 30px;
+	
+}
+
+.date span {
+	color: white;
+	text-decoration: none;
+	font-style: italic;
+	font-size: 13px;
+	text-align: center;
+	padding: 2px 5px;
+	background: black;
+	width:120px;
+	
+	display:block;
+	position:relative;
+	top: -10px;
+	font-family: "Droid serif", serif;
+}
+.date span.t{
+	position: relative;
+	margin : -17px auto;
+}
+.date span.a{
+	position: relative;
+	margin-top : -19px;
+	margin-left: 90%; 
+}
+.message p{
+	font-family: "Droid serif", serif;
+	}
+#social1{
+	float :right;
+}
+p.count{
+	font-family: "Droid serif", serif;
+}
+
+.count span{
+	font-size: 120px;
+	font-weight: 250;
+	font-family: 'Roboto', sans-serif;
+	color : grey;
+}
+	
+
+.comment {
+    overflow: hidden;
+    padding: 0 0 1em;
+    border-bottom: 1px solid #ddd;
+    margin: 0 0 1em;
+    *zoom: 1;
+}
+
+.comment-img {
+    float: left;
+    margin-right: 33px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.comment-img img {
+    display: block;
+}
+
+.comment-body {
+    overflow: hidden;
+}
+
+.comment .text {
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background:  #f3eee9;
+}
+
+.comment .text p:last-child {
+    margin: 0;
+}
+
+.comment .attribution {
+    margin: 0.5em 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Decoration */
+
+.comments,
+.comment {
+    position: relative;
+}
+
+.comments:before,
+.comment:before,
+.comment .text:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 65px;
+}
+
+.comments:before {
+    width: 3px;
+    top: -20px;
+    bottom: -20px;
+    background: rgba(0,0,0,0.1);
+}
+
+.comment:before {
+    width: 9px;
+    height: 9px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    margin: 16px 0 0 -6px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+    background: #ccc;
+}
+
+.comment:hover:before {
+    background: orange;
+}
+
+.comment .text:before {
+    top: 18px;
+    left: 78px;
+    width: 9px;
+    height: 9px;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #e5e5e5;
+    background: #fff;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+}​	
+
+.shape{
+	display: inline-block;
+	margin: 20px;
+	vertical-align: middle;
+}
+
+
+
+.bubble{
+	background-image: -webkit-linear-gradient(top, #fdfdfd, #f3f3f4);
+	border-radius: 10px;
+	position: relative;
+	border: 2px solid #a7a8ab;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+}
+
+.bubble p{
+	font-family: helvetica, Arial, sans-serif;
+	font-size: 1.15em;
+	font-weight: normal;	
+	color: #303334;
+	padding: 0 15px;
+	margin: 10px 0;
+	text-align: center;
+}
+
+.bubble:after{
+	content: "";
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	box-shadow: 2px 2px 2px #a7a8ab;
+	border: 4px solid;
+	border-color: transparent #f3f3f4 #f3f3f4 transparent;
+}
+.image{
+	margin-bottom: 0.6%;
+	margin-left : 49.7%;
+}
+	</style>
+
+	<script src="{% static 'js/jquery-1.7.1.min.js' %}"></script>
+	<script src="{% static 'js/social-buttons.js' %}"></script>
+	<script type="text/javascript">
+		$(function(){
+			
+		
+			$('table').hide();
+			$('.image').toggle(function(){
+				$('table').slideDown();
+				$('.image > img').attr('src',"{% static 'img/up-pressed.png' %} "); 
+		},function(){
+				$('table').slideUp();
+				$('.image > img').attr('src',"{% static 'img/down-pressed.png' %} "); 
+		});		
+			
+					$("#social1").socialButtons();
+		});	
+	</script>
+	
+</head>
+<body>
+
+{% include 'base.html' %}
+<div class = "body">
+<div id="social1" class="social"></div>
+<p class="count">Page Count :<br> <span>{{count}}</span></p>
+<!--
+<p>Last Viewed By : {{obj.user}} at {{obj.created}}</p>-->
+<h1 align="center">{{post.title}}</h1>  
+<div class="date"><span class="d">{{post.date.date}}</span>
+<span class="t">At {{post.date.time}}</span>
+<span class="a">By : {{post.author.first_name}} {{post.author.last_name}}</span>
+</div>
+<div class="main">
+<div class="post">{{post.post | safe}}</div>
+
+{% load comments %}
+{% get_comment_count for post as count%}
+{% if count == 0 %}
+<div class="shape bubble"><p>There are no comments yet.</p></div>
+{% elif count == 1 %}
+<div class="shape bubble"><p>Only 1 comment.</p></div>
+{% else %}
+<div class="shape bubble"><p>{{count}} comments have been written.</p></div>
+{% endif %}
+
+ <!--	{% render_comment_list for post %}-->
+
+<br><br>
+<section class="comments">
+{%for i,j,k in mixed %}
+    <article class="comment">
+      <a class="comment-img" href="#non">
+      {% if j.image %}
+        <img src="{{j.image.url}}" alt="" width="50" height="50">
+       {% else %} 
+        <img src="/media/uploads/default1.jpg" alt="" width="50" height="50">
+        {% endif %}
+      </a>
+      <div class="comment-body">
+        <div class="text">
+          <p>{{i.comment}}</p>
+        </div>
+        <p class="attribution">by <a href="/profile/{{k.username}}">{{i.user_name}}</a> at {{i.submit_date}}</p>
+      </div>
+    </article>
+    {%endfor%}
+ </section>   
+
+
+
+		<div class="shape bubble"><p>Comment</p></div>
+		<div class="image"><img src="{% static 'img/down-pressed.png' %}"></div>
+
+
+
+<div>
+{% get_comment_form for post as form%}
+<table>
+	<form action="{% comment_form_target %}" method="POST">
+	{% csrf_token %}
+	{{form}}
+	<tr>
+		<td colspan="2">
+		<input type="submit" name="submit" value="Post">
+		<input type="submit" name="preview" value="Preview">
+		</td>
+	</tr>
+	</form>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

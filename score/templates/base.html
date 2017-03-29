@@ -1,0 +1,14 @@
+
+{% if flag %}
+<div class="log">
+<div class="userPanel"></i><span class="username">Yo, {{user.username}}</span>
+<div class="button"><a href="/logout/" >Log Out</a></div></a> </p>	
+</div>
+</div>
+
+{% else %}
+<div class="log">
+<a href="/register/"><input type="button" value="Register"></a>	
+<a href="/login/"><input type="button" value="Login"></a>
+</div>
+{% endif %}

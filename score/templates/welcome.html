@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>User Profile</title>
+	<link href="{% static 'css/pace-theme-center-circle.css' %}" rel="stylesheet" />
+	<style type="text/css">
+		@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+*  { box-sizing: border-box; }
+
+body { margin: 100px; font-family: helvetica, sans-serif; background:url("/static/img/bg.jpg"); font-size: 10px; }
+
+a { text-decoration: none; -webkit-transition: all .4s; }
+
+.content { width: 85%; margin: -99px auto;-webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+  -webkit-transition: -webkit-transform 0.7s cubic-bezier(1, 0.005, 0.24, 1);
+  transition: transform 0.7s cubic-bezier(1, 0.005, 0.24, 1);
+  background-color: white; }
+
+
+/* the HEAD stuffs */
+.head { overflow: auto; padding: 20px; background-color: #54b9cd; border-radius: 5px 5px 0 0; font-size: 1.2em; color: white; }
+  .head:before { content: ""; display: block; float: left; width: 80px; height: 80px; margin-right: 20px;{% if more.image %}
+  background: url("{{more.image.url}}") no-repeat;
+{% else %}
+
+background: url("/media/uploads/default1.jpg") no-repeat;
+{% endif %} background-size: 80px; border-radius: 40px; }
+  .head h1 { margin: 15px 0 5px; font-weight: 100; font-size: 2.2em; color: white; }
+
+
+/* the BODY stuffs */
+.body { display: none; background: #323a45; color: #fff; }
+.body a { display: inline-block; width: 25%; padding: 20px; border-right: 1px solid rgba(255,255,255,.25); text-align: center; color: #fff; font-size: 2.5em}
+  .body a:hover { background: #515761; }
+    .body a:last-child { border-right: none; }
+
+
+/* the FOOT stuffs */
+.foot { /*height: 100px;*/ }
+
+[class^="footItem"] { display: inline-block; width: 33.333333%; padding: 15px 0; text-align: center; color: rgba(255,255,255,.8); font-size: 1.1em; }
+[class^="footItem"] span { display: block; font-size: 1.6em; margin-bottom: 5px; color: #fff; }
+  .footItem1 { background: #14b9d6; border-radius: 0 0 0 5px; }
+    .footItem1:hover { background: #5bcee2; }
+  .footItem2 { background: #f27935; }
+    .footItem2:hover { background: #f6a172; }
+  .footItem3 { background: #1fbba6; border-radius: 0 0 5px 0; }
+    .footItem3:hover { background: #63d0c1; }
+
+
+ .main{
+ 	width: 100%; 
+ 	height: 100%; 	
+ }  
+
+
+.other{
+ 	height: 350px;
+ 	border-top : 2px solid #f0f0f0;
+
+ }
+
+ .info{
+ 	height : 200px;
+ 	padding-left: 18%;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background-image: url('/media/uploads/6.jpg');
+  background-repeat: no-repeat;
+  background-size: 40%;
+  background-position: right;
+  background: #1fbba6;
+ }
+	
+
+.page {
+  height: 100%;
+  width : 100%;
+  
+}
+.chart{
+	width:60%;
+	float: left;
+	border-right: 2px solid #f0f0f0;
+}
+
+.extra{
+	margin-left: 400px;
+	width: 30%;	
+	padding-left: 200px;
+  
+}
+
+
+
+.content_inner {
+  height: 50%;
+  overflow-y: auto;
+  padding: 50px 20%;
+}
+
+/* basically all styling from now on */
+
+
+.menu_toggle {
+  z-index: 900;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  cursor: pointer;
+  width: 100px;
+  height: 80px;
+  background-color: #F37272;
+  border-bottom-right-radius: 100%;
+}
+
+.menu_toggle:active i { opacity: 0.8; }
+
+.menu_toggle i { color: #f0f0f0; }
+
+.menu_toggle .menu_open,
+.menu_toggle .menu_close {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -15px;
+  margin-left: -12px;
+  -webkit-transition: -webkit-transform 0.7s cubic-bezier(1, 0.005, 0.24, 1);
+  transition: transform 0.7s cubic-bezier(1, 0.005, 0.24, 1);
+}
+
+.menu_toggle .menu_open {
+  -webkit-transform-origin: -100px -100px;
+  -ms-transform-origin: -100px -100px;
+  transform-origin: -100px -100px;
+}
+
+.menu_toggle .menu_close {
+  -webkit-transform: rotate(20deg);
+  -ms-transform: rotate(20deg);
+  transform: rotate(20deg);
+  -webkit-transform-origin: -100px -160px;
+  -ms-transform-origin: -100px -160px;
+  transform-origin: -100px -160px;
+}
+
+.menu_items {
+  position: fixed;
+  bottom: 0;
+  left: 50px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu_items li {
+  height: 60px;
+  margin-bottom: 30px;
+  -webkit-transform: translateX(-300px);
+  -ms-transform: translateX(-300px);
+  transform: translateX(-300px);
+  -webkit-transition: -webkit-transform 0.7s 0s cubic-bezier(1, 0.005, 0.24, 1);
+  transition: transform 0.7s 0s cubic-bezier(1, 0.005, 0.24, 1);
+}
+
+.menu_items li:nth-child(2) { margin-left: 27px; }
+
+.menu_items li:nth-child(3) { margin-left: 67px; }
+
+.menu_items li:nth-child(4) { margin-left: 107px; }
+
+.menu_items a {
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: black;
+  -webkit-transition: color .2s;
+  transition: color .2s;
+}
+
+.menu_items a .icon {
+  position: relative;
+  display: inline-block;
+  margin-right: 25px;
+  color: #f0f0f0;
+}
+
+.menu_items a .icon:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  content: '';
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin-left: -33px;
+  margin-top: -32px;
+  border-radius: 100%;
+  border: 2px solid #f0f0f0;
+  background-color: #F37272 ;
+  -webkit-transition: border-color .2s;
+  transition: border-color .2s;
+}
+
+.menu_items a:hover { color: #f0f0f0; }
+
+.menu_items a:hover .icon:after { border-color: #F37272; }
+
+.menu_items a:active .icon { color: #F37272; }
+
+/* Let's open up the menu */
+
+.menu_effect { /*.content_inner {
+    height: 100%;
+  }*/ }
+
+.menu_effect .content {
+  -webkit-transform: rotate(-30deg);
+  -ms-transform: rotate(-30deg);
+  transform: rotate(-30deg);
+}
+
+.menu_effect .menu_open {
+  -webkit-transform: rotate(-20deg);
+  -ms-transform: rotate(-20deg);
+  transform: rotate(-20deg);
+}
+
+.menu_effect .menu_close {
+  -webkit-transform: rotate(0);
+  -ms-transform: rotate(0);
+  transform: rotate(0);
+}
+
+.menu_effect .menu_items li {
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transition: -webkit-transform 0.35s 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.35s 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.menu_effect .menu_items li:nth-child(2) {
+  -webkit-transition-delay: .47s;
+  transition-delay: .47s;
+}
+
+.menu_effect .menu_items li:nth-child(3) {
+  -webkit-transition-delay: .48s;
+  transition-delay: .48s;
+}
+
+.menu_effect .menu_items li:nth-child(4) {
+  -webkit-transition-delay: .49s;
+  transition-delay: .49s;
+}
+
+.btn { 
+    position: relative;         
+    margin-top:20%;
+    margin-left: 19%;  
+    height: 36px; 
+    width:36px;  
+}
+#lines:before { 
+    border-bottom: 10px double grey;
+    border-top: 3px solid grey;    
+    content:"";
+    height: 3.5px; 
+    position: absolute; 
+    right:3px;  
+    top: 4px; 
+    width:30px; 
+}
+h1 {
+  border-bottom: 1px solid #ddd;
+}
+
+
+	</style>
+	<script src="{% static 'js/jquery-1.6.3.min.js' %}"></script>
+	<script src="{% static 'js/jqBarGraph.1.1.js' %}"></script>
+	<script type="text/javascript">
+	$(function(){
+		$('span').dblclick(function(){
+
+			classclicked = $(this).attr('class')
+			temp = $(this).text();
+			$(this).html("<form  class=form method=GET ><input class=change type=text name=tr> </form>");
+			$('.change').val(temp);
+			$('.form').submit(function(){
+				change(classclicked);
+				return false;
+			});
+			
+		});
+	function change(classclicked){
+	$.ajax({
+      			url:'http://127.0.0.1:8000/lol/',
+      			
+      			dataType : "json",
+
+      			type: "GET",
+      			data : {tr : $('.change').val(), clc : classclicked },
+
+      			success : function(d,status,xhr){
+      				$('.'+classclicked).text(d['val']);
+      				$.getScript("{% static 'js/pace.js' %}");
+      			},      			
+      			error : function(xhr,errmsg,err){
+      				alert(xhr.status + ':' + xhr.responseText);
+      			}
+      			});
+
+      		}
+		});
+
+	</script>
+	
+</head>
+<body>
+<div class="page"> <span class="menu_toggle"> <i class="menu_open fa fa-bars fa-lg"></i> <div id="lines" class="btn"></div>
+  <i class="menu_close fa fa-times fa-lg"></i> </span>
+  <ul class="menu_items">
+    <li><a href="/write/"><i class="icon fa fa-signal fa-2x"></i> &nbsp; Start Blogging</a></li>
+    <li><a href="/dashboard/"><i class="icon fa fa-coffee fa-2x"></i> &nbsp;  Dashboard</a></li>
+    <li><a href="/changepassword/"><i class="icon fa fa-heart fa-2x"></i> &nbsp; Change Password</a></li>
+    <li><a href="/logout/"><i class="icon fa fa-heart fa-2x"></i> &nbsp; Say Goodbye</a></li>
+  </ul>
+ <!-- <main class="content">-->
+<div class="content">
+  <div class="head">
+      <h1>{{name}}</h1>
+      {% if more.quote %}
+      "{{more.quote}}"
+      {% else %}
+      "I was too lazy to type my favorite my quote, so you're seeing this."
+      {% endif %}
+  </div>
+  <div class="body">
+    <a href="#"><span class="entypo-twitter"></span></a><a href="#"><span class="entypo-facebook"></span></a><a href="#"><span class="entypo-dribbble"></span></a><a href="#"><span class="entypo-gplus"></span></a>
+  </div>
+  <div class="foot">
+    <a href="#" class="footItem1"><span class="entypo-heart"></span>{{num}}</a><a href="#" class="footItem2"><span class="entypo-user"></span>{{following}}</a><a href="#" class="footItem3"><span class="entypo-plus"></span>{{followed_by}}</a>
+  </div>
+<div class="main">
+	<div class="info">
+    
+		<p>First Name : <span class=first>{{first}}</span></p>
+
+	<p>Last Name : <span class=last>{{last}}</span></p>
+	<p>Email : <span class=email>{{email}}</span></p>
+	
+	<p>You can also find him at : {{more.url}}</p>
+	<p>About : {{more.about}}</p>
+	<p>Date Joined : {{date}}</p>
+
+	</div>
+	<div class="other">	
+	<div class="chart">
+	<div id="chart">	</div></div> 
+	<div class="extra"><h3>Last Viewed Article :</h3>
+	<p>{{obj.post.title}}</p>
+	<p>By {{obj.user}}</p>
+	<p>At {{obj.created.date}}</p>
+	</div>
+
+	</div>
+
+</div>
+</div>
+</div>
+
+<script>
+{% if length >= 5 %}
+arrayOfData = new Array(
+[{{glist.0.1}},'{{glist.0.0.title}}','#34495e'],
+   	 [{{glist.1.1}},'{{glist.1.0.title}}','#c0392b'],
+   	 [{{glist.2.1}},'{{glist.2.0.title}}','#e74c3c'],
+   	 [{{glist.3.1}},'{{glist.3.0.title}}','#333333'],
+   	 [{{glist.4.1}},'{{glist.4.0.title}}','#666666']
+);
+$('#chart').jqBarGraph({ data: arrayOfData, title: '<h3 style="text-decoration:underline">Most Viewed Articles</h3>'
+});	
+{% elif length == 4 %}
+arrayOfData = new Array(
+[{{glist.0.1}},'{{glist.0.0.title}}','#34495e'],
+   	 [{{glist.1.1}},'{{glist.1.0.title}}','#c0392b'],
+   	 [{{glist.2.1}},'{{glist.2.0.title}}','#e74c3c'],
+   	 [{{glist.3.1}},'{{glist.3.0.title}}','#333333']
+   	 
+);
+$('#chart').jqBarGraph({ data: arrayOfData, title: '<h3>Most Viewed Articles</h3>'
+});	
+
+{% elif length == 3 %}
+arrayOfData = new Array(
+[{{glist.0.1}},'{{glist.0.0.title}}','#34495e'],
+   	 [{{glist.1.1}},'{{glist.1.0.title}}','#c0392b'],
+   	 [{{glist.2.1}},'{{glist.2.0.title}}','#e74c3c']
+   	
+);
+$('#chart').jqBarGraph({ data: arrayOfData, title: '<h3>Most Viewed Articles</h3>'
+});	
+
+{% elif length == 2 %}
+arrayOfData = new Array(
+[{{glist.0.1}},'{{glist.0.0.title}}','#34495e'],
+   	 [{{glist.1.1}},'{{glist.1.0.title}}','#c0392b']
+   	 
+);
+$('#chart').jqBarGraph({ data: arrayOfData, title: '<h3>Most Viewed Articles</h3>'
+});	
+
+
+{% elif length == 1 %}
+arrayOfData = new Array(
+[{{glist.0.1}},'{{glist.0.0.title}}','#34495e']
+  
+);
+$('#chart').jqBarGraph({ data: arrayOfData, title: '<h3>Most Viewed Articles</h3>'
+});	
+{% else %}
+$('#chart').html("<h1>You havent posted any articles yet.</h1>")
+{% endif %}
+var $page = $('.page');
+$('.menu_toggle').click(function () {
+    $page.toggleClass('menu_effect');
+});
+$('.content').click(function () {
+    $page.removeClass('menu_effect');
+});
+</script>
+
+
+</body>
+</html>

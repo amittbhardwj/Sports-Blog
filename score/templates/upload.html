@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload Picture</title>
+	<!--{{form.media}}-->
+</head>
+<body>
+<h1 align="center">Upload your profile picture</h1>
+
+<form method = "Post"  enctype="multipart/form-data" action="/saveimage/">
+{% csrf_token %}
+
+<p><input type="file" name="image"></p>
+<p><input type="submit" value="submit"></p>
+<!--{{form.as_p}}-->
+
+</form>
+
+<br><br>
+</body>
+</html>

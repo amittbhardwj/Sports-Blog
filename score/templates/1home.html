@@ -1,0 +1,160 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+
+	<title>Web page</title>
+
+	<style type="text/css">
+	a {
+		text-decoration: none;
+	}
+	.log{
+		margin-left: 80%;
+	}
+	</style>
+
+	<script src="{% static 'js/jquery-1.7.1.min.js' %}"></script>
+	<script src="{% static 'js/jquery.cycle.all.js' %}"></script>
+	<!--<script type="text/javascript">
+	$(function(){
+		$('#button').click(function(){
+		$('#button').val("ashu") ;
+		});
+	});
+	</script>--> 
+
+	<script type="text/javascript">
+	(
+		function name(){ 	
+	$.ajax({
+      			url:'http://127.0.0.1:8000/boom/',
+      			
+      			dataType : "json",
+      			
+      			success : function(d,status,xhr){
+
+      			if(d.hasOwnProperty('recent')){
+      				d.count = makearray(d);
+      				if (d.count == 1){$('#button').val(d.count + " new article") ;}
+      				else{$('#button').val(d.count + " new articles") ;} 
+      				
+      				//items.push(d);
+      				//alert(items);
+      				//$('.recent').children('p:first').html("<p>"+ d.count +"</p>");		
+      				$('#button').click(function(){
+      					n = 5
+						newt = d.count
+      					kept = n - newt
+      					for (i=1;i<=kept;i++)
+      					{
+      						item = $('p:nth-child('+i+')').html();
+      						//console.log(item);
+      						$('p:nth-child('+i + newt+')').html(item);	
+      					}
+      					for (i=1;i<=newt; i++)
+      					{
+      					    $('p:nth-child('+i+')').html("<p>"+ d.recent +"</p>");	
+      					}
+      					
+      					 //console.log($('p:nth-child(1)').html());
+      					//$('#button').val("No new articles");
+      					//$('p:nth-child(1)').html("<p>"+ d.recent +"</p>");
+      					//$('.recent').children('p:first').html("<p>"+ d.recent +"</p>");
+      				});
+
+      			}
+      			//makearray();
+
+      			//alert(d[5]);
+      			//for (i = 1 ; i<5 ; i++){
+      			//$('.recent').append("<p>"+d[i]+"</p>");
+      			 //}
+      			 },
+      			//flag = d.check;
+      			//as(d.check);
+      			 
+      			error : function(xhr,errmsg,err){
+      				alert(xhr.status + ':' + xhr.responseText);
+      			}
+      			//complete:function(){
+      			//	setTimeout(ashu,5000);
+      			//};
+
+      		});
+
+setTimeout(name,3000)
+}());
+
+var arr=[];
+function makearray(data){
+
+	if(data !== arr[length-1]){
+arr.push(data);
+console.log(arr.length);
+return arr.length;
+
+//document.write(arr[0][recent]);
+}
+}
+$(window).load(function(){
+	$('.slides').cycle({
+		fx : 'scrollDown',
+		sync : 0,
+		delay : -2000
+	});
+
+});
+
+	</script> 
+<!--	<script type="text/javascript">
+
+      $(function(){
+			$('#button').click(function(){				      	
+      		$.getJSON('http://127.0.0.1:8000/boom/',function(data,status,xhr){
+      			alert(data.a);	
+      		});
+      	});
+      	});
+
+	</script>-->
+</head>
+<body>
+
+
+{% include 'base.html'  %}
+
+
+<div class="tri">
+<input type="button" id="button" value="No New articles">
+{% for i in titles%}
+<p>{{i}}</p>
+{%endfor%}
+</div>
+
+
+<div class="slides">
+{% for i,j in final %}
+
+<img src={{i}} width=40 height=40>
+
+{% endfor %}
+</div>
+
+<!--{% for i in a.values %}
+<p>{{i}}</p>
+
+{% endfor%}
+-->
+<!--{% for i in images%}
+
+{%endfor%}-->
+
+<br>
+<p class="blog"></p>
+{{teams}}
+{{scores}}
+</body>
+</html>

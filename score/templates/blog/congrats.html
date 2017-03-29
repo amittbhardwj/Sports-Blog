@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Success</title>
+	<link href="{% static 'css/lovely-tag.css' %}" rel="stylesheet">
+	<style type="text/css">
+		a {
+		text-decoration: none;
+	}
+	.log{
+		margin-left: 80%;
+	}
+	input[type="text"] {
+ 	 font-size : 23px;
+ 	 padding: 0;
+ 	 border: none;
+ 	 background-color: #f1f1f1;
+ 	 outline: none;
+ 	 padding: 0.5em;
+	}
+	.note{
+		margin-left: 20%;
+	}
+	span{
+		margin-left: 10%;
+	}
+	input[type="text"]:focus { background-color: #eaeaea; }
+	.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+.new-tag{
+	margin: 0px 10px 10px 33%;
+}
+.action-button
+{
+	
+	padding: 10px 40px;
+	margin: 0px 10px 10px 42%;
+
+	border-radius: 8px;
+	font-family: 'Pacifico', cursive;
+	font-size: 25px;
+	color: #FFF;
+	text-decoration: none;	
+}
+
+.blue
+{
+	background-color: #3498DB;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9;
+}
+.action-button:active
+{
+	transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+	border-bottom: 1px solid;
+}
+	</style>
+	<script src="{% static 'js/jquery-1.6.3.min.js' %}"> </script>
+	<script type="text/javascript">
+	$(function(){
+		$('.main').hide();
+		$('.action-button').click(function(){
+				
+		 		$(this).hide();
+		 		$('.forcedadd').slideUp(1000);
+		 		$('.main').slideDown(1000);
+
+		 	});
+	});
+	</script>
+</head>
+<body>
+{% include 'base.html' %}
+<a href="/home/">Home</a>
+<br><br><br><br><br><br>
+<div align=center class="main">
+{% if num == 1%}
+<h3>Wow! First post is always special.</h3>
+<h1>You made it. Congrats!</h1>
+{% elif num == 2%}
+<h3>Writing is fun. Keep going.</h3>
+<h1>Congrats!</h1>
+{% elif num == 3%}
+<h3>You're developing a good habit. Go on.</h3>
+<h1 class="wish">Congrats!</h1>
+{% else %}
+<h3>You have {{num}} posts under your belt now.</h3>
+<h1>Congrats!</h1>
+{% endif %}
+<p><a href="/write"><b>Have another go hero!</b></a></p>
+</div>
+<div class="forcedadd">
+<h1 class="note">Tags are important. They help us in categorizing <br><span>your articles and make search efficient.</h1></span>
+<div class="new-tag">
+
+ <div class="tags"><form method="GET" action="/check/{{obj.id}}" class="form">
+          <input type="text" placeholder="add relevant tags" class="new-tag-input" name=tags>
+          <input type="submit" value="Next"></form>
+ </div>
+ </div><br>
+ </div>
+<a href="#" class="action-button animate blue">Next</a>
+<script src="{% static 'js/lovely-tag.js' %}"> </script>
+</body>
+</html>

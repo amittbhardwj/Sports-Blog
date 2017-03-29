@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>
+		Profile		
+	</title>
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'css/tx3-tag-cloud.css' %}">-->
+	<style type="text/css">
+	a {
+		text-decoration: none;
+	}
+	.log{
+		margin-left: 80%;
+	}
+	.container{
+		width : 100%;
+	}
+	.info {
+		position: absolute;
+		width : 60%;
+	}
+	/*.tags{
+		width : 38%;
+		float : right;
+		border : 2px solid black;
+	}*/
+	.wordcloud {
+border: 1px solid #036;
+height: 4in;
+margin: 0.5in auto;
+padding: 0;
+page-break-after: always;
+page-break-inside: avoid;
+width: 4in;
+}
+#wordcloud1 {width: 30%;  float: right;}
+	</style>
+	<script src="{% static 'js/jquery-1.6.3.min.js' %}"></script>
+	<!--<script src="{% static 'js/jquery.awesomeCloud-0.2.js' %}"></script>
+	<script src="{% static 'js/jquery.tx3-tag-cloud.js' %}"></script>-->
+	<script type="text/javascript">
+	$(function(){
+
+		//$("#wordcloud1").awesomeCloud({
+		//			"size" : {
+		//				"grid" : 20,
+		//				"normalize" : false
+		//			},
+		//			"options" : {
+		//				"color" : "random-dark",
+		//				"rotationRatio" : 0.35,
+		//				"printMultiplier" : 3,
+		//				"sort" : "random"
+		//			},
+		//			"font" : "'Times New Roman', Times, serif",
+		//			"shape" : "circle"
+		//		});
+		//		
+		//$("#tagcloud").tx3TagCloud({
+		//	multiplier: 5
+		//	});
+		
+		$('.button').click(function(){
+			if ($(this).attr('value') == 'Following'){
+			$(this).attr('value','Follow');
+			$.ajax({
+      			url:'http://127.0.0.1:8000/follow/{{puser.username}}/1/',
+      			
+      			dataType : "json",
+
+      			type: "GET",
+      			
+
+      			success : function(d,status,xhr){
+      				console.log("Unfollowed");
+      			},      			
+      			error : function(xhr,errmsg,err){
+      				console.log(xhr.status);
+      			}
+      			});
+		}
+		else {$(this).attr('value','Following');
+			$.ajax({
+      			url:'http://127.0.0.1:8000/follow/{{puser.username}}/0/',
+      			
+      			dataType : "json",
+
+      			type: "GET",
+      			
+
+      			success : function(d,status,xhr){
+      				console.log("Started Following");
+      			},      			
+      			error : function(xhr,errmsg,err){
+      				console.log(xhr.status);
+      			}
+      			});
+		}
+		});
+	});
+
+	</script>
+</head>
+<body>
+{% include 'base.html' %}
+
+<h1 align="center"> Public Profile </h1>
+<div class="container">
+<div class="info">
+<input type="button" class = 'button' value="{{val}}">
+<p>Name : {{puser.first_name}} {{puser.last_name}}</p>
+<p>Username : {{puser.username}} </p>
+<p>Email : {{puser.email}} </p>
+<p>Date Joined : {{puser.date_joined}} </p>
+<p>Last logged-in : {{puser.last_login}}
+<h3>Articles by {{puser.username}}</h3>
+
+{% if posts %}
+{% for i in posts %}
+{% ifequal i.is_draft False %}
+<p><a href="/profile/{{puser.username}}/{{i.title}}">{{i.title}}</a></p>
+{% endifequal %}
+{%endfor%}
+{% else %}
+<p><i>Hasnt posted yet :/</i></p>
+{% endif %}
+</div>
+<!--
+<div class="tags" >
+<h2 align="center">Recently Used Tags</h2>
+<div id="wordcloud1" class="wordcloud">
+
+{% for i in tag %}
+<span data-weight="{{rand | random}}"><a href="">{{i}}</a></span>
+{% endfor %}
+</div>
+-->
+<!--<h2 align="center">Recently Used Tags</h2>
+
+<ul id="tagcloud" > 
+{% for i in tag %}
+<li data-weight={{forloop.revcounter}}><a href="">{{i}}</a></li>
+{% endfor %}
+</ul>-->
+</div>
+</div>
+</body>
+</html>

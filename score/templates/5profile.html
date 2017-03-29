@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>
+		Profile		
+	</title>
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'css/tx3-tag-cloud.css' %}">-->
+	<style type="text/css">
+	@import url(http://fonts.googleapis.com/css?family=Playfair+Display:700);
+	a {
+		text-decoration: none;
+	}
+	.log{
+		margin-left: 80%;
+	}
+		<style type="text/css">
+@import "compass/utilities/links/unstyled-link";
+html,body{
+		margin : 0;
+		padding: 0;
+	}
+
+body{
+  font-family: 'Raleway', sans-serif;  
+}
+a{
+  @include unstyled-link();
+  color:#00BBBB;
+  &:hover{
+      color:#666;
+  }
+}
+#container{
+  width:400px;
+  height:500px;
+  @include box-shadow(#999 2px 2px 10px);
+ /* margin:0px auto;*/	
+}
+.image{
+  height:275px;
+  background: center center no-repeat;
+  background-size:cover;
+
+  
+}
+.info{
+  
+  margin-top: -22px;
+  height: 85%;
+  background:black;
+  text-align:center;
+  h1.name{
+    text-transform:uppercase;
+    margin:0px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #5C5B5B;
+    font-size: 30px;
+    padding: 25px 0px 0px 0px;
+  }
+  h3.position{
+    margin:0px;
+  }
+  p{
+    color:#666;
+    padding:0px 60px;
+  }
+}
+
+/*.social{
+  height:40px;
+  background:#DAE0DE;
+  text-align:center;
+  padding-top:20px;
+  i{
+    font-size:20px;
+  }
+  a{
+    margin:0px 10px;
+    color:#666;
+    &:hover{
+      color:#00BBBB;
+    }
+  }
+}*/
+.more {
+	margin-left : 400px;
+	height : 100%;
+	padding: 2.25em 0;
+  background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  background-image: repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
+  -webkit-background-size: 3px 3px;
+  -moz-background-size: 3px 3px;
+  background-size: 3px 3px;
+	position: absolute;
+	width : 900px;
+}
+
+	
+a.button1{
+		background: #ECECEC;
+		border-radius: 15px;
+		padding: 10px 20px;
+		display: block;
+		font-family: arial;
+		font-weight: bold;
+		color:#7f7f7f;
+		text-decoration: none;
+		text-shadow:0px 1px 0px #fff;
+		border:1px solid #a7a7a7;
+		width: 145px;
+		text-align: center;
+		margin-top:10px;
+		margin-left: 300px;
+		box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+		-webkit-transition:box-shadow 0.5s;
+	}
+	
+	a.button1:hover{
+		box-shadow: 0px 2px 1px white inset, 0px -2px 20px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+	}
+	a.button1:active{
+		box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white, 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
+		background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 100%);
+	}
+
+	
+	.more p, .more h3 {
+		padding: 0 1.6875em;
+	}
+	.info td, .info h1, .info p{
+		color :white;
+		font-family: 'Playfair Display', serif;
+	} 
+	.about p{
+		padding: 15px;
+		font-size: 1.5em;
+		background-color: #C5CFCE;
+
+	}
+	</style>
+	<script src="{% static 'js/jquery-1.6.3.min.js' %}"></script>
+	
+	<script type="text/javascript">
+	$(function(){
+		$(".details").hide();
+										
+  $(".summary").click (function(event) { 
+											
+    event.preventDefault();
+												
+      if ($(this).parents('.slide').hasClass('expanded')) {
+												
+        $(this).siblings(".details").slideUp('slow')
+          
+													
+        $(this).parents('.slide').removeClass('expanded');
+			} else {
+				$('.slide.expanded').each(function(){
+          $(this).removeClass('expanded').find('.details').slideUp('slow')
+            .end().find('.summary');
+        });
+													
+        $(this).siblings(".details").slideDown('slow')
+          
+														
+        $(this).parents('.slide').addClass('expanded');
+
+      }
+  });
+						
+		$('a.button1').click(function(){
+			if ($(this).text() == 'Following'){
+			$(this).text('Follow');
+			$.ajax({
+      			url:'http://127.0.0.1:8000/follow/{{puser.username}}/1/',
+      			
+      			dataType : "json",
+
+      			type: "GET",
+      			
+
+      			success : function(d,status,xhr){
+      				console.log("Unfollowed");
+      			},      			
+      			error : function(xhr,errmsg,err){
+      				console.log(xhr.status);
+      			}
+      			});
+		}
+		else {$(this).text('Following');
+			$.ajax({
+      			url:'http://127.0.0.1:8000/follow/{{puser.username}}/0/',
+      			
+      			dataType : "json",
+
+      			type: "GET",
+      			
+
+      			success : function(d,status,xhr){
+      				console.log("Started Following");
+      			},      			
+      			error : function(xhr,errmsg,err){
+      				console.log(xhr.status);
+      			}
+      			});
+		}
+		});
+	});
+
+	</script>
+</head>
+<body>
+<!--{% include 'base.html' %}-->
+
+<div class="more">
+<a href="#" class="button1">{{val}}</a>
+<br>
+<div class="about">
+<p>{{more.about}}</p>
+</div>
+
+<h3>Articles by {{puser.username}}</h3>
+
+{% if posts %}
+{% for i in posts %}
+{% ifequal i.is_draft False %}
+<h2><a href="/profile/{{puser.username}}/{{i.title}}">{{i.title}}</a></h2>
+{{i.post|safe}}
+{% endifequal %}
+{%endfor%}
+{% else %}
+<p><i>Hasnt posted yet :/</i></p>
+{% endif %}
+
+
+
+</div>
+<div id="container">
+{% if more.image %}
+  <div class="image" style="background-image: url({{more.image.url}})"></div>
+{% else %}
+<img src="/media/uploads/default1.jpg" alt="" width="50" height="50">
+        {% endif %}
+  <div class="info">
+    <h1 class="name">{{puser.first_name}} {{puser.last_name}}</h1>
+    
+    <p style="background : white;color:black;"><i>"{{more.quote}}"</i></p>
+		<table align="center" cellspacing="20">
+		<tr>
+<td>Username : </td><td>{{puser.username}} </td></tr>
+<br>
+<tr>
+<td>Email : </td><td>{{puser.email}} </td></tr>
+<tr>
+<td>Date Joined : </td><td>{{puser.date_joined}} </td></tr>
+<tr>
+<td>Last logged-in : </td><td>{{puser.last_login}}</td></tr>
+<tr>
+<td>Followers : </td><td>{{followers}}</td></tr>
+<tr>
+<td>Articles Posted : </td><td>{{count}}</td></tr>
+</table>
+  
+  </div>
+ <!-- <div class="social">
+    <a href=""><i class="icon-twitter"></i></a>
+    
+    <a href=""><i class="icon-linkedin"></i></a>
+    
+    <a href=""><i class="icon-facebook"></i></a>
+    
+    <a href=""><i class="icon-google-plus"></i></a>
+    
+    <a href=""><i class="icon-github-alt"></i></a>
+  </div>-->
+</div>  
+
+
+</div>
+</div>
+</body>
+</html>

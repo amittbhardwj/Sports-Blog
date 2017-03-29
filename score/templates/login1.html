@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<style>
+body {
+  background: #33b5e5 url("http://38.media.tumblr.com/d23deac40b06633b79520a8552f40b94/tumblr_nb1uhrRrge1st5lhmo1_1280.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: "Roboto";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body:before {
+  z-index: -1;
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #33b5e5;
+  background: rgba(51, 181, 229, 0.8);
+  width: 100%;
+  height: 100%;
+}
+.form {
+  position: relative;
+  background: #fff;
+  width: 285px;
+  margin: 40px auto 0;
+  padding: 40px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.form h2 {
+  margin: 0 0 20px;
+  line-height: 1;
+  color: #33b5e5;
+  font-size: 18px;
+  font-weight: 400;
+}
+.form .alert {
+  position: relative;
+  background: #f3f3f3;
+  color: #666;
+  font-size: 12px;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+.form .alert .fa-times-circle {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  margin-top: -8px;
+  float: right;
+}
+.form input {
+  outline: none;
+  display: block;
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  color: #ccc;
+  font-family: "Roboto";
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-wieght: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: 0.2s linear;
+  -moz-transition: 0.2s linear;
+  -ms-transition: 0.2s linear;
+  -o-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+.form input:focus {
+  color: #333;
+  border: 1px solid #33b5e5;
+}
+.form input[type=submit] {
+  cursor: pointer;
+  background: #33b5e5;
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 25px;
+  border: 0;
+  color: #fff;
+  font-family: "Roboto";
+  font-size: 14px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: 0.2s linear;
+  -moz-transition: 0.2s linear;
+  -ms-transition: 0.2s linear;
+  -o-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+.form input[type=submit]:hover {
+  background: #1a9bcb;
+}
+.form footer {
+  background: #f3f3f3;
+  width: 100%;
+  padding: 15px 40px;
+  margin: 0 0 -40px -40px;
+  color: #666;
+  font-size: 12px;
+  text-align: center;
+}
+</style>
+<script src="{% static 'js/jquery-1.6.3.min.js' %}"></script>
+    <script src="{% static 'js/jquery.polymer-form.min.js' %}"></script>
+    <script type="text/javascript">
+      $(function(){
+          $(".form").polymerForm();
+          $('.fform').submit(function(){
+            $.getScript("{% static 'js/pace.js' %}");
+          });
+        });
+    </script>
+</head>
+<body>
+<div class='form aniamted bounceIn'>
+  <div class='login'>
+    <h2>Login To Your Account</h2>
+    <form method="post" action="/profile/" class="fform">
+      {% csrf_token %}
+      <p><input type="text" label="Username" placeholder='Username' bar-height='4px'  label-color="black" active-color="#0DEA8B" name=username required class="form"> </p>  
+      <p><input type="password" placeholder='Password' label="Password" bar-height='4px' label-color="black" active-color="#0DEA8B" name=password required class="form"></p>
+      <input  type="submit" value="submit">
+    </form>
+  </div>
+</div>
+</body>
